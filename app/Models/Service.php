@@ -8,4 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 class Service extends Model
 {
     use HasFactory;
+
+    /**
+     * Get all of the comments for the Service
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function sub_services(): HasMany
+    {
+        return $this->hasMany(SubService::class);
+    }
 }

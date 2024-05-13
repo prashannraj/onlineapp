@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::create('sup_services', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('sub_service_id')->constrained('sub_services')->cascadeOnDelete();
+            $table->string('name')->unique();
             $table->timestamps();
         });
     }

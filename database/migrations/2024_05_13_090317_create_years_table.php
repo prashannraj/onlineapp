@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::create('years', function (Blueprint $table) {
             $table->id();
+            $table->string('year');
+            $table->boolean('status')->default(false);
             $table->timestamps();
         });
     }
