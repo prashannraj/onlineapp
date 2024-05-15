@@ -23,7 +23,18 @@ class PostResource extends Resource
     {
         return $form
             ->schema([
-                //
+                Forms\Components\TextInput::make('service_id')
+                    ->required()
+                    ->numeric(),
+                Forms\Components\TextInput::make('sub_service_id')
+                    ->required()
+                    ->numeric(),
+                Forms\Components\TextInput::make('sup_service_id')
+                    ->required()
+                    ->numeric(),
+                Forms\Components\TextInput::make('name')
+                    ->required()
+                    ->maxLength(255),
             ]);
     }
 
@@ -31,7 +42,25 @@ class PostResource extends Resource
     {
         return $table
             ->columns([
-                //
+                Tables\Columns\TextColumn::make('service_id')
+                    ->numeric()
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('sub_service_id')
+                    ->numeric()
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('sup_service_id')
+                    ->numeric()
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('name')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('created_at')
+                    ->dateTime()
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
+                Tables\Columns\TextColumn::make('updated_at')
+                    ->dateTime()
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
                 //

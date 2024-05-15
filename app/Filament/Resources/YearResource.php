@@ -23,7 +23,11 @@ class YearResource extends Resource
     {
         return $form
             ->schema([
-                //
+                Forms\Components\TextInput::make('year')
+                    ->required()
+                    ->maxLength(255),
+                Forms\Components\Toggle::make('status')
+                    ->required(),
             ]);
     }
 
@@ -31,7 +35,18 @@ class YearResource extends Resource
     {
         return $table
             ->columns([
-                //
+                Tables\Columns\TextColumn::make('year')
+                    ->searchable(),
+                Tables\Columns\IconColumn::make('status')
+                    ->boolean(),
+                Tables\Columns\TextColumn::make('created_at')
+                    ->dateTime()
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
+                Tables\Columns\TextColumn::make('updated_at')
+                    ->dateTime()
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
                 //
