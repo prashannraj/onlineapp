@@ -23,15 +23,24 @@ class PostResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('service_id')
-                    ->required()
-                    ->numeric(),
-                Forms\Components\TextInput::make('sub_service_id')
-                    ->required()
-                    ->numeric(),
-                Forms\Components\TextInput::make('sup_service_id')
-                    ->required()
-                    ->numeric(),
+                Forms\Components\Select::make('service.name')
+                
+                ->searchable()
+                ->preload()
+                ->required(),
+                   
+                Forms\Components\Select::make('sub_service.name')
+                
+                ->searchable()
+                ->preload()
+                ->required(),
+                    
+                Forms\Components\Select::make('sup_service_id')
+                
+                ->searchable()
+                ->preload()
+                ->required(),
+                    
                 Forms\Components\TextInput::make('name')
                     ->required()
                     ->maxLength(255),

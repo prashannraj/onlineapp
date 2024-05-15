@@ -38,9 +38,10 @@ class SubServiceResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('service_name')
+                Tables\Columns\TextColumn::make('service.name')
                     ->sortable(),
                 Tables\Columns\TextColumn::make('name')
+                    ->label('Sub Service Name')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()

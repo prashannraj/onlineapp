@@ -4,18 +4,29 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Candidate extends Model
 {
     use HasFactory;
 
     /**
-     * Get the user that owns the Candidate
+     * The roles that belong to the Candidate
      *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
-    public function vacancy(): BelongsTo
+    public function vacancies(): BelongsToMany
     {
-        return $this->belongsTo(Vacancy::class);
+        return $this->belongsToMany(vacancy::class);
+    }
+
+    /**
+     * The roles that belong to the Candidate
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function quatas(): BelongsToMany
+    {
+        return $this->belongsToMany(Quata::class);
     }
 }

@@ -23,9 +23,11 @@ class SupServiceResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('sub_service_id')
-                    ->required()
-                    ->numeric(),
+                Forms\Components\Select::make('sub_service_id')
+                    ->relationship('sub_service', 'name')
+                    ->searchable()
+                    ->preload()
+                    ->required(),
                 Forms\Components\TextInput::make('name')
                     ->required()
                     ->maxLength(255),
@@ -36,10 +38,12 @@ class SupServiceResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('sub_service_id')
-                    ->numeric()
+                Tables\Columns\TextColumn::make('service.name')
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('sub_service.name')
                     ->sortable(),
                 Tables\Columns\TextColumn::make('name')
+                    ->label('Sub Service name')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()

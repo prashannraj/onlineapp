@@ -23,7 +23,14 @@ class QualificationResource extends Resource
     {
         return $form
             ->schema([
+                Forms\Components\Select::make('post_id')
+                 ->relationship('post', 'name')
+                ->searchable()
+                ->preload()
+                ->required(),
                 Forms\Components\RichEditor::make('name')
+                    ->label('Minimum Qualification')
+                    ->columnSpanFull()
                     ->required (),
             ]);
     }

@@ -4,6 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+
 
 class Vacancy extends Model
 {
@@ -19,13 +22,14 @@ class Vacancy extends Model
         return $this->belongsTo(Year::class);
     }
 
+                                    
     /**
-     * Get all of the comments for the Vacancy
+     * The roles that belong to the Vacancy
      *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
-    public function candidates(): HasMany
+    public function candidates(): BelongsToMany
     {
-        return $this->hasMany(Candidate::class);
+        return $this->belongsToMany(Candidate::class);
     }
 }
