@@ -23,45 +23,20 @@ class VacancyResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('year_id')
-                    ->required()
-                    ->numeric(),
-                Forms\Components\TextInput::make('service_id')
-                    ->required()
-                    ->numeric(),
-                Forms\Components\TextInput::make('sub_service_id')
-                    ->required()
-                    ->numeric(),
-                Forms\Components\TextInput::make('sup_service_id')
-                    ->required()
-                    ->numeric(),
-                Forms\Components\TextInput::make('post_id')
-                    ->required()
-                    ->numeric(),
-                Forms\Components\TextInput::make('level_id')
-                    ->required()
-                    ->numeric(),
-                Forms\Components\TextInput::make('qualification_id')
-                    ->required()
-                    ->numeric(),
-                Forms\Components\TextInput::make('service')
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('sub_service')
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('sup_service')
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('post')
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('level')
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('qualification')
-                    ->required()
-                    ->maxLength(255),
+                Forms\Components\Select::make('year.name')->label('Year')
+                    ->required(),
+                Forms\Components\Select::make('service.name')->label('Service')
+                    ->required(),
+                Forms\Components\Select::make('sub_service.name')->label('Sub Service')
+                    ->required(),
+                Forms\Components\Select::make('sup_service.name')->label('Sup Service')
+                    ->required(),
+                Forms\Components\Select::make('post.name')->label('Post')
+                    ->required(),
+                Forms\Components\Select::make('level.name')->label('Level')
+                    ->required(),
+                Forms\Components\Select::make('qualification.name')->label('Minimum Qualification')
+                    ->required(),
                 Forms\Components\TextInput::make('Adv_number')
                     ->required()
                     ->numeric(),
@@ -71,6 +46,11 @@ class VacancyResource extends Resource
                 Forms\Components\TextInput::make('double_fee')
                     ->required()
                     ->numeric(),
+                Forms\Components\Checkboxlist::make('quatas')
+                    ->relationship('quatas', 'name')
+                   // ->multiple()
+                   // ->preload()
+                    ->required(),
                 Forms\Components\DatePicker::make('open_date_bs')
                     ->required(),
                 Forms\Components\DatePicker::make('single_payment_date_bs')
@@ -89,39 +69,27 @@ class VacancyResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('year_id')
-                    ->numeric()
+                Tables\Columns\TextColumn::make('year.name')
+                    
                     ->sortable(),
-                Tables\Columns\TextColumn::make('service_id')
-                    ->numeric()
+                Tables\Columns\TextColumn::make('service.name')
+                   
                     ->sortable(),
-                Tables\Columns\TextColumn::make('sub_service_id')
-                    ->numeric()
+                Tables\Columns\TextColumn::make('sub_service.name')
+                    
                     ->sortable(),
-                Tables\Columns\TextColumn::make('sup_service_id')
-                    ->numeric()
+                Tables\Columns\TextColumn::make('sup_service.name')
+                    
                     ->sortable(),
-                Tables\Columns\TextColumn::make('post_id')
-                    ->numeric()
+                Tables\Columns\TextColumn::make('post.name')
+                    
                     ->sortable(),
-                Tables\Columns\TextColumn::make('level_id')
-                    ->numeric()
+                Tables\Columns\TextColumn::make('level.name')
+                    
                     ->sortable(),
                 Tables\Columns\TextColumn::make('qualification_id')
                     ->numeric()
                     ->sortable(),
-                Tables\Columns\TextColumn::make('service')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('sub_service')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('sup_service')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('post')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('level')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('qualification')
-                    ->searchable(),
                 Tables\Columns\TextColumn::make('Adv_number')
                     ->numeric()
                     ->sortable(),
@@ -130,6 +98,9 @@ class VacancyResource extends Resource
                     ->sortable(),
                 Tables\Columns\TextColumn::make('double_fee')
                     ->numeric()
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('quatas')
+                   
                     ->sortable(),
                 Tables\Columns\TextColumn::make('open_date_bs')
                     ->date()

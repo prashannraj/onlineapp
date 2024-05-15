@@ -24,7 +24,6 @@ class PostResource extends Resource
         return $form
             ->schema([
                 Forms\Components\Select::make('service.name')
-                
                 ->searchable()
                 ->preload()
                 ->required(),
@@ -50,6 +49,7 @@ class PostResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
+        ->defaultSort('created_at', 'asc')
             ->columns([
                 Tables\Columns\TextColumn::make('service_id')
                     ->numeric()

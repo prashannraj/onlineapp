@@ -32,4 +32,15 @@ class Vacancy extends Model
     {
         return $this->belongsToMany(Candidate::class);
     }
+
+    /**
+     * The roles that belong to the Vacancy
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function quatas(): BelongsToMany
+    {
+        return $this->belongsToMany(Quata::class);
+    }
 }
+

@@ -18,4 +18,14 @@ class Quata extends Model
     {
         return $this->belongsToMany(Candidate::class);
     }
+
+    /**
+     * The vacancies that belong to the Quata
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function vacancies(): BelongsToMany
+    {
+        return $this->belongsToMany(Vacancy::class);
+    }
 }

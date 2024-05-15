@@ -38,6 +38,7 @@ class QualificationResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
+        ->defaultSort('created_at', 'asc')
             ->columns([
                 Tables\Columns\TextColumn::make('name')
                     ->searchable(),

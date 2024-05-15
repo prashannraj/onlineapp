@@ -20,12 +20,6 @@ return new class extends Migration
             $table->foreignId('post_id')->constrained()->cascadeOnDelete();
             $table->foreignId('level_id')->constrained()->cascadeOnDelete();
             $table->foreignId('qualification_id')->constrained()->cascadeOnDelete();
-            $table->string('service');
-            $table->string('sub_service');
-            $table->string('sup_service');
-            $table->string('post');
-            $table->string('level');
-            $table->string('qualification');
             $table->integer('Adv_number');
             $table->unsignedInteger('single_fee');
             $table->unsignedInteger('double_fee');
