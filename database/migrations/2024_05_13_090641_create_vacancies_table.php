@@ -26,7 +26,7 @@ return new class extends Migration
             $table->date('open_date_bs');
             $table->date('single_payment_date_bs');
             $table->date('double_payment_date_bs');
-            $table->text('description')->nullable()->default('text');
+            $table->text('description', 65536)->nullable()->default('text');
             $table->string('name')->unique();
             $table->timestamps();
         });

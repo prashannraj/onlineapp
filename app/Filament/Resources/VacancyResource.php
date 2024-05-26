@@ -3,8 +3,15 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\VacancyResource\Pages;
-
 use App\Models\Vacancy;
+use App\Models\Post;
+use App\Models\Service;
+use App\Models\SubService;
+use App\Models\SupService;
+use App\Models\Level;
+use App\Models\Qualification;
+use App\Models\Quata;
+use App\Models\Year;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -23,20 +30,84 @@ class VacancyResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\Select::make('year.name')->label('Year')
+                Forms\Components\Select::make('year_id')
+                 ->options(Year::all()->pluck('year', 'id'))
+                 ->label('Select Year')
+                 ->searchable()
+                 ->preload()
+                ->required(),
+
+                Forms\Components\Select::make('service_id')
+                ->options(Service::all()->pluck('name', 'id'))
+                ->label('Select Service')
+                ->searchable()
+                ->preload()
+                ->required()
+                ->reactive()
+                ->afterStateUpdated(fn (callable $set) => $set('sub_service_id', null)),
+
+                Forms\Components\Select::make('sub_service_id')
+                ->options(function (callable $get) {
+                    $service = Service::find($get('service_id'));
+                    if (!$service) {
+                        return SubService::all()->pluck('name', 'id');
+                    }
+                    return $service->sub_services->pluck('name', 'id');
+                })
+                ->label('Select Sub Service')
+                ->searchable()
+                ->preload()
+                ->reactive()
+                ->required()
+                ->afterStateUpdated(fn (callable $set) => $set('sup_service_id', null)),
+
+                Forms\Components\Select::make('sup_service_id')
+                ->options(function (callable $get) {
+                    $sub_service = SubService::find($get('sub_service_id'));
+                    if (!$sub_service) {
+                        return SupService::all()->pluck('name', 'id');
+                    }
+                    return $sub_service->sup_services->pluck('name', 'id');
+                })
+                ->label('Select Sup Service')
+                ->searchable()
+                ->preload()
+                ->required()
+                ->reactive()
+                ->afterStateUpdated(fn (callable $set) => $set('post_id', null)),
+
+                Forms\Components\Select::make('post_id')
+                ->options(function (callable $get) {
+                    $sup_service = SupService::find($get('sup_service_id'));
+                    if (!$sup_service) {
+                        return Post::all()->pluck('name', 'id');
+                    }
+                    return $sup_service->posts->pluck('name', 'id');
+                })
+                ->label('Select Post')
+                ->searchable()
+                ->preload()
+                ->reactive()
+                ->required()
+                ->afterStateUpdated(fn (callable $set) => $set('qualification_id', null)),
+
+                Forms\Components\Select::make('level_id')
+                ->options(Level::all()->pluck('name', 'id'))->label('Level')
                     ->required(),
-                Forms\Components\Select::make('service.name')->label('Service')
-                    ->required(),
-                Forms\Components\Select::make('sub_service.name')->label('Sub Service')
-                    ->required(),
-                Forms\Components\Select::make('sup_service.name')->label('Sup Service')
-                    ->required(),
-                Forms\Components\Select::make('post.name')->label('Post')
-                    ->required(),
-                Forms\Components\Select::make('level.name')->label('Level')
-                    ->required(),
-                Forms\Components\Select::make('qualification.name')->label('Minimum Qualification')
-                    ->required(),
+
+                Forms\Components\Select::make('qualification_id')
+                ->options(function (callable $get) {
+                    $post = Post::find($get('post_id'));
+                    if (!$post) {
+                        return Qualification::all()->pluck('name', 'id');
+                    }
+                        return $post->qualifications->pluck('name', 'id');
+
+                })
+                ->searchable()
+                ->required()
+                ->label('Minimum Qualification'),
+
                 Forms\Components\TextInput::make('Adv_number')
                     ->required()
                     ->numeric(),

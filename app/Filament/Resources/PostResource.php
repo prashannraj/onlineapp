@@ -3,8 +3,10 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\PostResource\Pages;
-
 use App\Models\Post;
+use App\Models\Service;
+use App\Models\SubService;
+use App\Models\SupService;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -23,26 +25,45 @@ class PostResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\Select::make('service.name')
+                Forms\Components\Select::make('service_id')
+                ->options(Service::all()->pluck('name', 'id'))
+                ->label('Select Service')
                 ->searchable()
                 ->preload()
-                ->required(),
+                ->required()
+                ->reactive()
+                ->afterStateUpdated(fn (callable $set) => $set('sub_service_id', null)),
 
-                Forms\Components\Select::make('sub_service.name')
-
+                Forms\Components\Select::make('sub_service_id')
+                ->options(function (callable $get) {
+                    $service = Service::find($get('service_id'));
+                    if (!$service) {
+                        return SubService::all()->pluck('name', 'id');
+                    }
+                    return $service->sub_services->pluck('name', 'id');
+                })
+                ->label('Select Sub Service')
                 ->searchable()
                 ->preload()
-                ->required(),
+                ->reactive()
+                ->afterStateUpdated(fn (callable $set) => $set('sup_service_id', null)),
 
                 Forms\Components\Select::make('sup_service_id')
-
+                ->options(function (callable $get) {
+                    $sub_service = SubService::find($get('sub_service_id'));
+                    if (!$sub_service) {
+                        return SupService::all()->pluck('name', 'id');
+                    }
+                    return $sub_service->sup_services->pluck('name', 'id');
+                })
+                ->label('Select Sup Service')
                 ->searchable()
                 ->preload()
                 ->required(),
 
                 Forms\Components\TextInput::make('name')
-                    ->required()
-                    ->maxLength(255),
+                    ->label('Type Post Name')
+                    ->required(),
             ]);
     }
 
@@ -51,17 +72,17 @@ class PostResource extends Resource
         return $table
         ->defaultSort('created_at', 'asc')
             ->columns([
-                Tables\Columns\TextColumn::make('service_id')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('sub_service_id')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('sup_service_id')
-                    ->numeric()
-                    ->sortable(),
                 Tables\Columns\TextColumn::make('name')
-                    ->searchable(),
+                ->searchable(),
+                Tables\Columns\TextColumn::make('service.name')
+                ->numeric()
+                ->sortable(),
+                Tables\Columns\TextColumn::make('sub_service.name')
+                ->numeric()
+                ->sortable(),
+                Tables\Columns\TextColumn::make('sup_service.name')
+                ->numeric()
+                ->sortable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
