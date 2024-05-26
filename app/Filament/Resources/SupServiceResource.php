@@ -3,7 +3,7 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\SupServiceResource\Pages;
-use App\Filament\Resources\SupServiceResource\RelationManagers;
+use App\Filament\Resources\SupServiceResource\RelationManagers\PostRelationManager;
 use App\Models\SupService;
 use Filament\Forms;
 use Filament\Forms\Form;
@@ -17,7 +17,7 @@ class SupServiceResource extends Resource
 {
     protected static ?string $model = SupService::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-s-folder-minus';
 
     public static function form(Form $form): Form
     {
@@ -72,7 +72,7 @@ class SupServiceResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            PostRelationManager::class
         ];
     }
 

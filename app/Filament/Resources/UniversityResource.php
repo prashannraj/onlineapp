@@ -17,7 +17,7 @@ class UniversityResource extends Resource
 {
     protected static ?string $model = University::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-s-folder-arrow-down';
 
     public static function form(Form $form): Form
     {

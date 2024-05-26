@@ -1,11 +1,9 @@
 <?php
 
 namespace App\Filament\Resources;
-
 use App\Filament\Resources\ServiceResource\Pages;
 use App\Filament\Resources\ServiceResource\RelationManagers\SubServiceRelationManager;
 use App\Models\Service;
-use App\Models\SubService;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -18,13 +16,15 @@ class ServiceResource extends Resource
 {
     protected static ?string $model = Service::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+
+    protected static ?string $navigationIcon = 'heroicon-s-folder-open';
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
                 Forms\Components\TextInput::make('name')
+
                     ->required()
                     ->maxLength(255),
             ]);
@@ -63,7 +63,7 @@ class ServiceResource extends Resource
     public static function getRelations(): array
     {
         return [
-           //
+           SubServiceRelationManager::class
         ];
     }
 

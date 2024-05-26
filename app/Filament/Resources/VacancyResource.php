@@ -3,7 +3,7 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\VacancyResource\Pages;
-use App\Filament\Resources\VacancyResource\RelationManagers;
+
 use App\Models\Vacancy;
 use Filament\Forms;
 use Filament\Forms\Form;
@@ -17,7 +17,7 @@ class VacancyResource extends Resource
 {
     protected static ?string $model = Vacancy::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-s-arrow-up-on-square-stack';
 
     public static function form(Form $form): Form
     {
@@ -70,22 +70,22 @@ class VacancyResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('year.name')
-                    
+
                     ->sortable(),
                 Tables\Columns\TextColumn::make('service.name')
-                   
+
                     ->sortable(),
                 Tables\Columns\TextColumn::make('sub_service.name')
-                    
+
                     ->sortable(),
                 Tables\Columns\TextColumn::make('sup_service.name')
-                    
+
                     ->sortable(),
                 Tables\Columns\TextColumn::make('post.name')
-                    
+
                     ->sortable(),
                 Tables\Columns\TextColumn::make('level.name')
-                    
+
                     ->sortable(),
                 Tables\Columns\TextColumn::make('qualification_id')
                     ->numeric()
@@ -100,7 +100,7 @@ class VacancyResource extends Resource
                     ->numeric()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('quatas')
-                   
+
                     ->sortable(),
                 Tables\Columns\TextColumn::make('open_date_bs')
                     ->date()

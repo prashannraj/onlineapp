@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Filament\Resources\ServiceResource\RelationManagers;
+namespace App\Filament\Resources\SupServiceResource\RelationManagers;
 
 use Filament\Forms;
 use Filament\Forms\Form;
@@ -10,9 +10,9 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
-class SubServiceRelationManager extends RelationManager
+class PostRelationManager extends RelationManager
 {
-    protected static string $relationship = 'sub_services';
+    protected static string $relationship = 'posts';
 
     public function form(Form $form): Form
     {

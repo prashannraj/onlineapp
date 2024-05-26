@@ -17,7 +17,7 @@ class QuataResource extends Resource
 {
     protected static ?string $model = Quata::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-s-folder';
 
     public static function form(Form $form): Form
     {

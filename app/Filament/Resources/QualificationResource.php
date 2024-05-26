@@ -17,7 +17,7 @@ class QualificationResource extends Resource
 {
     protected static ?string $model = Qualification::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-s-clipboard-document-list';
 
     public static function form(Form $form): Form
     {
