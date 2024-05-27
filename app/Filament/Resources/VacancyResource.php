@@ -31,11 +31,15 @@ class VacancyResource extends Resource
         return $form
             ->schema([
                 Forms\Components\Select::make('year_id')
-                 ->options(Year::all()->pluck('year', 'id'))
+                ->options(function (callable $get) {
+                    $year = Year::where('status', 1)->pluck('year', 'id');
+                     return $year;
+                })
                  ->label('Select Year')
                  ->searchable()
                  ->preload()
-                ->required(),
+                ->required()
+                ->afterStateUpdated(fn (callable $set) => $set('vacancy_id', null)),
 
                 Forms\Components\Select::make('service_id')
                 ->options(Service::all()->pluck('name', 'id'))
@@ -96,14 +100,15 @@ class VacancyResource extends Resource
                     ->required(),
 
                 Forms\Components\Select::make('qualification_id')
-                ->options(function (callable $get) {
-                    $post = Post::find($get('post_id'));
-                    if (!$post) {
-                        return Qualification::all()->pluck('name', 'id');
-                    }
-                        return $post->qualifications->pluck('name', 'id');
+                ->options(Qualification::all()->pluck('name', 'id'))
+                // ->options(function (callable $get) {
+                //     $post = Post::find($get('post_id'));
+                //     if (!$post) {
+                //         return Qualification::all()->pluck('name', 'id');
+                //     }
+                //         return $post->qualifications->pluck('name', 'id');
 
-                })
+                // })
                 ->searchable()
                 ->required()
                 ->label('Minimum Qualification'),
