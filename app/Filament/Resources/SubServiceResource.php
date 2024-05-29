@@ -17,6 +17,7 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 class SubServiceResource extends Resource
 {
     protected static ?string $model = SubService::class;
+    protected static ?int $navigationSort = 5;
 
     protected static ?string $navigationIcon = 'heroicon-s-folder-plus';
 

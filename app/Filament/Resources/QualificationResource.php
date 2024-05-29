@@ -16,6 +16,7 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 class QualificationResource extends Resource
 {
     protected static ?string $model = Qualification::class;
+    protected static ?int $navigationSort = 10;
 
     protected static ?string $navigationIcon = 'heroicon-s-clipboard-document-list';
 

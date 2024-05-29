@@ -16,6 +16,7 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 class GenderResource extends Resource
 {
     protected static ?string $model = Gender::class;
+    protected static ?int $navigationSort = 7;
 
     protected static ?string $navigationIcon = 'heroicon-s-user-plus';
 

@@ -23,6 +23,7 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 class VacancyResource extends Resource
 {
     protected static ?string $model = Vacancy::class;
+    protected static ?int $navigationSort = 1;
 
     protected static ?string $navigationIcon = 'heroicon-s-arrow-up-on-square-stack';
 
@@ -32,7 +33,7 @@ class VacancyResource extends Resource
             ->schema([
                 Forms\Components\Select::make('year_id')
                 ->options(function (callable $get) {
-                    $year = Year::where('status', 1)->pluck('year', 'id');
+                    $year = Year::where('status', '1')->pluck('year', 'id');
                      return $year;
                 })
                  ->label('Select Year')
@@ -41,7 +42,7 @@ class VacancyResource extends Resource
                 ->required()
                 ->afterStateUpdated(fn (callable $set) => $set('vacancy_id', null)),
 
-                Forms\Components\Select::make('service_id')
+                Forms\Components\Select::make('service_id')->default('')
                 ->options(Service::all()->pluck('name', 'id'))
                 ->label('Select Service')
                 ->searchable()
@@ -136,6 +137,7 @@ class VacancyResource extends Resource
                 Forms\Components\RichEditor::make('description')
                     ->columnSpanFull(),
                 Forms\Components\TextInput::make('name')
+                    ->columnSpanFull()
                     ->required()
                     ->maxLength(255),
             ]);

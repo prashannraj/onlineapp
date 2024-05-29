@@ -16,6 +16,7 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 class MotherToungeResource extends Resource
 {
     protected static ?string $model = MotherTounge::class;
+    protected static ?int $navigationSort = 9;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 

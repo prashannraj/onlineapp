@@ -16,6 +16,7 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 class SupServiceResource extends Resource
 {
     protected static ?string $model = SupService::class;
+    protected static ?int $navigationSort = 6;
 
     protected static ?string $navigationIcon = 'heroicon-s-folder-minus';
 
