@@ -20,6 +20,11 @@ class QualificationResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-s-clipboard-document-list';
 
+    public static function getNavigationBadge(): ?string
+{
+    return static::getModel()::count();
+}
+
     public static function form(Form $form): Form
     {
         return $form

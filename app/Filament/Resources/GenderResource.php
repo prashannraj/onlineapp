@@ -17,6 +17,10 @@ class GenderResource extends Resource
 {
     protected static ?string $model = Gender::class;
     protected static ?int $navigationSort = 7;
+    public static function getNavigationBadge(): ?string
+{
+    return static::getModel()::count();
+}
 
     protected static ?string $navigationIcon = 'heroicon-s-user-plus';
 

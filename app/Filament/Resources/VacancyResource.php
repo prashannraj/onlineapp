@@ -27,6 +27,11 @@ class VacancyResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-s-arrow-up-on-square-stack';
 
+    public static function getNavigationBadge(): ?string
+{
+    return static::getModel()::count();
+}
+
     public static function form(Form $form): Form
     {
         return $form
