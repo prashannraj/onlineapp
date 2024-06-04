@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Candidate extends Model
 {
@@ -28,5 +29,15 @@ class Candidate extends Model
     public function quatas(): BelongsToMany
     {
         return $this->belongsToMany(Quata::class);
+    }
+
+    /**
+     * Get the detail associated with the Candidate
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function detail(): HasOne
+    {
+        return $this->hasOne(Detail::class);
     }
 }

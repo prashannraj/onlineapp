@@ -170,9 +170,9 @@ class VacancyResource extends Resource
                 Tables\Columns\TextColumn::make('level.name')
 
                     ->sortable(),
-                Tables\Columns\TextColumn::make('qualification_id')
-                    ->numeric()
-                    ->sortable(),
+                // Tables\Columns\TextColumn::make('qualification_id')
+                //     ->numeric()
+                //     ->sortable(),
                 Tables\Columns\TextColumn::make('Adv_number')
                     ->numeric()
                     ->sortable(),
@@ -182,18 +182,18 @@ class VacancyResource extends Resource
                 Tables\Columns\TextColumn::make('double_fee')
                     ->numeric()
                     ->sortable(),
-                Tables\Columns\TextColumn::make('quatas')
+                // Tables\Columns\TextColumn::make('quatas')
 
-                    ->sortable(),
+                //     ->sortable(),
                 Tables\Columns\TextColumn::make('open_date_bs')
                     ->date()
                     ->sortable(),
-                Tables\Columns\TextColumn::make('single_payment_date_bs')
-                    ->date()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('double_payment_date_bs')
-                    ->date()
-                    ->sortable(),
+                // Tables\Columns\TextColumn::make('single_payment_date_bs')
+                //     ->date()
+                //     ->sortable(),
+                // Tables\Columns\TextColumn::make('double_payment_date_bs')
+                //     ->date()
+                //     ->sortable(),
                 Tables\Columns\TextColumn::make('name')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('created_at')
