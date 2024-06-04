@@ -23,6 +23,7 @@ return new class extends Migration
             $table->integer('Adv_number');
             $table->unsignedInteger('single_fee');
             $table->unsignedInteger('double_fee');
+            $table->string('qutas')-nullable();
             $table->date('open_date_bs');
             $table->date('single_payment_date_bs');
             $table->date('double_payment_date_bs');
