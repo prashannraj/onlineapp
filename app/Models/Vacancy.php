@@ -12,6 +12,10 @@ class Vacancy extends Model
 {
     use HasFactory;
 
+    protected $casts =[
+        'quatas'=> 'array'
+    ];
+
     /**
      * Get the user that owns the Vacancy
      *

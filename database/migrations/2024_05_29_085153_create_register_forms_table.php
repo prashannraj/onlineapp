@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('register_forms', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('candidate_id')->constrained()->cascadeOnDelete();
             $table->foreignId('vacancy_id')->constrained()->cascadeOnDelete();
             $table->string('grand_total')->nullable();
             $table->string('payment_method')->nullable();

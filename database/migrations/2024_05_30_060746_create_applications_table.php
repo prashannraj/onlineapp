@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('register_forms_id')->constrained()->cascadeOnDelete();
             $table->foreignId('vacancy_id')->constrained()->cascadeOnDelete();
+            $table->integer('qty')->default(1);
             $table->timestamps();
         });
     }

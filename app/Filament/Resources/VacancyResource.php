@@ -17,6 +17,9 @@ use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
+use Filament\Forms\Components\Repeater;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\TextInput;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
@@ -128,10 +131,17 @@ class VacancyResource extends Resource
                 Forms\Components\TextInput::make('double_fee')
                     ->required()
                     ->numeric(),
-                Forms\Components\Checkboxlist::make('quatas')
-                    ->relationship('quatas', 'name')
-                   // ->multiple()
-                   // ->preload()
+                Repeater::make('quatas')
+                    ->schema([
+                        Select::make('quata')
+                            ->options(Quata::all()->pluck('name', 'id'))->nullable(),
+                        TextInput::make('demand')->nullable(),
+                    ])
+                    ->columns(2)
+                // Forms\Components\Checkboxlist::make('quatas')
+                //     ->relationship('quatas', 'name')
+                //    // ->multiple()
+                //    // ->preload()
                     ->required(),
                 Forms\Components\DatePicker::make('open_date_bs')
                     ->required(),
