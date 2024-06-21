@@ -35,6 +35,7 @@ class QualificationResource extends Resource
                 ->preload()
                 ->required(),
                 Forms\Components\RichEditor::make('name')
+                    ->unique(ignoreRecord:true)
                     ->label('Minimum Qualification')
                     ->columnSpanFull()
                     ->required (),

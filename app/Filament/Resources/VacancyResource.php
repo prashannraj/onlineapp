@@ -144,14 +144,18 @@ class VacancyResource extends Resource
                 //    // ->preload()
                     ->required(),
                 Forms\Components\DatePicker::make('open_date_bs')
+                ->timezone('Asia/Kathmandu')
                     ->required(),
                 Forms\Components\DatePicker::make('single_payment_date_bs')
+                ->timezone('Asia/Kathmandu')
                     ->required(),
                 Forms\Components\DatePicker::make('double_payment_date_bs')
+                ->timezone('Asia/Kathmandu')
                     ->required(),
                 Forms\Components\RichEditor::make('description')
                     ->columnSpanFull(),
                 Forms\Components\TextInput::make('name')
+                    ->unique(ignoreRecord:true)
                     ->columnSpanFull()
                     ->required()
                     ->maxLength(255),
@@ -162,10 +166,10 @@ class VacancyResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('year.name')
+                Tables\Columns\TextColumn::make('year.year')
 
                     ->sortable(),
-                Tables\Columns\TextColumn::make('service.name')
+                Tables\Columns\TextColumn::make('service.id')
 
                     ->sortable(),
                 Tables\Columns\TextColumn::make('sub_service.name')

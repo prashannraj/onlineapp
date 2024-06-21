@@ -69,6 +69,7 @@ class PostResource extends Resource
 
                 Forms\Components\TextInput::make('name')
                     ->label('Type Post Name')
+                    ->unique(ignoreRecord:true)
                     ->required(),
             ]);
     }

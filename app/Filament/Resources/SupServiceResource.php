@@ -35,6 +35,7 @@ class SupServiceResource extends Resource
                     ->preload()
                     ->required(),
                 Forms\Components\TextInput::make('name')
+                    ->unique(ignoreRecord:true)
                     ->required()
                     ->maxLength(255),
             ]);

@@ -40,6 +40,11 @@ class AdminPanelProvider extends PanelProvider
                 // Widgets\AccountWidget::class,
                 // Widgets\FilamentInfoWidget::class,
             ])
+            ->brandName('Vacancy Management System')
+            ->brandLogo(asset('images/logo.png'))
+            ->brandLogoHeight('3.5rem')
+            ->darkModeBrandLogo(asset('images/favicon.jpg'))
+            ->favicon(asset('images/favicon.jpg'))
             ->middleware([
                 EncryptCookies::class,
                 AddQueuedCookiesToResponse::class,
@@ -53,6 +58,7 @@ class AdminPanelProvider extends PanelProvider
             ])
             ->authMiddleware([
                 Authenticate::class,
-            ]);
+            ])
+            ->viteTheme('resources/css/filament/admin/theme.css');
     }
 }

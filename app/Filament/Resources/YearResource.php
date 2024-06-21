@@ -31,6 +31,7 @@ class YearResource extends Resource
             ->schema([
                 Forms\Components\TextInput::make('year')
                     ->required()
+                    ->unique(ignoreRecord:true)
                     ->maxLength(255),
                 Forms\Components\Toggle::make('status')
                     ->required(),

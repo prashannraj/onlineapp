@@ -30,6 +30,7 @@ class UniversityResource extends Resource
         return $form
             ->schema([
                 Forms\Components\TextInput::make('name')
+                    ->unique(ignoreRecord:true)
                     ->required()
                     ->maxLength(255),
             ]);
